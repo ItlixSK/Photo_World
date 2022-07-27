@@ -18,7 +18,7 @@ class PhotoPagingSource(
 
         return try {
             val response = apiService.searchPhoto(query, position, params.loadSize)
-            val photos = response.result
+            val photos = response.results
             LoadResult.Page(
                 data = photos,
                 prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,

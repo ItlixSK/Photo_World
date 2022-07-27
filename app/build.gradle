@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 //    id 'com.google.dagger.hilt.android' version '2.42' apply false
 }
 
@@ -56,7 +57,7 @@ dependencies {
 
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:2.42"
-    kapt "com.google.dagger:hilt-compiler:2.38.1"
+    kapt "com.google.dagger:hilt-compiler:2.42"
 
     // Retrofit + GSON
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
