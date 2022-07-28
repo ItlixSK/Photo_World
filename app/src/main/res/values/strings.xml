@@ -7,4 +7,5 @@
     <string name="result_could_not_be_loader">Result could not be loader</string>
     <string name="no_result_found_for_this_query">No result found for this query</string>
     <string name="results_could_not_be_loader">Results could not be loader</string>
+    <string name="search">Search</string>
 </resources>
