@@ -41,7 +41,6 @@ class GalleryPhotoAdapter :
                 textUserName.text = photo.user.username
             }
         }
-
     }
 
     companion object {
