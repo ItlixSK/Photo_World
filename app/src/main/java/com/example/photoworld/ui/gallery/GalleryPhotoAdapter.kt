@@ -11,7 +11,7 @@ import com.example.photoworld.R
 import com.example.photoworld.data.model.PhotoModel
 import com.example.photoworld.databinding.ItemCardBinding
 
-class GalleryPhotoAdapter :
+class GalleryPhotoAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<PhotoModel, GalleryPhotoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
@@ -27,8 +27,20 @@ class GalleryPhotoAdapter :
         }
     }
 
-    class PhotoViewHolder(private val binding: ItemCardBinding) :
+    inner class PhotoViewHolder(private val binding: ItemCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION){
+                    val item = getItem(position)
+                    if (item != null){
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
 
         fun bind(photo: PhotoModel) {
             binding.apply {
@@ -41,6 +53,9 @@ class GalleryPhotoAdapter :
                 textUserName.text = photo.user.username
             }
         }
+    }
+    interface OnItemClickListener{
+        fun onItemClick(photo: PhotoModel)
     }
 
     companion object {

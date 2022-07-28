@@ -8,13 +8,16 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.photoworld.R
+import com.example.photoworld.data.model.PhotoModel
 import com.example.photoworld.databinding.FragmentGalleryBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
-class GalleryFragment : Fragment(R.layout.fragment_gallery) {
+class GalleryFragment : Fragment(R.layout.fragment_gallery), GalleryPhotoAdapter.OnItemClickListener {
 
     private val viewModel by viewModels<GalleryViewModel>()
     private var mBinding: FragmentGalleryBinding? = null
@@ -25,7 +28,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
         mBinding = FragmentGalleryBinding.bind(view)
 
-        val adapter = GalleryPhotoAdapter()
+        val adapter = GalleryPhotoAdapter(this)
 
         binding.apply {
             recyclerView.setHasFixedSize(true)
@@ -61,6 +64,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         }
 
         setHasOptionsMenu(true)
+    }
+    override fun onItemClick(photo: PhotoModel) {
+        val action = GalleryFragmentDirections.actionGalleryFragmentToDetailFragment(photo)
+        findNavController().navigate(action)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
