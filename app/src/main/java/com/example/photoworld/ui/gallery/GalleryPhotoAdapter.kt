@@ -44,12 +44,12 @@ class GalleryPhotoAdapter(private val listener: OnItemClickListener) :
 
         fun bind(photo: PhotoModel) {
             binding.apply {
-                Glide.with(imageView)
+                Glide.with(imageViewPhoto)
                     .load(photo.urls.regular)
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_launcher_foreground)
-                    .into(imageView)
+                    .into(imageViewPhoto)
                 textUserName.text = photo.user.username
             }
         }
